@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Flask App</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="output"></div>
+  <script>
+    var socket = io();
+    var timer = setInterval(request_time, 1000);
+    var output = document.getElementById("output");
+
+    function request_time() {
+      socket.emit("request_time");
+    }
+
+    socket.on('return_time', function(data) {
+        output.innerText = data["time"];
+    })
+  </script>
+</body>
+</html>
